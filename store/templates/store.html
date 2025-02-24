@@ -33,23 +33,23 @@
 
 {% block content%}
 
-
-
+<div style="display: flex ;">  
+<div> 
 {% for itms in categories %}
-<a href="{{itms.get_absolute_url}}">
-<button class="button is-white" style="margin-bottom: 10px; background-color: #F4F9F8 ;">{{itms.title}}</button>
+&nbsp; &nbsp;&nbsp;<a href="{{itms.get_absolute_url}}">
+<button class="btn btn-outline-secondary" >{{itms.title}}</button> <br>
 </a><br> 
-{% endfor%}
-
+{% endfor%} 
+</div> 
 
 <div style="width: 80%;height: 400px ;margin: 0 auto;" class="row row-cols-1 row-cols-md-3 g-10 ">
+
+
+
     {%for produc in products%}
     <div style=""  class="col d-flex   "> 
       <div style="border-radius: 8px;padding: 20px;margin-bottom: 20px;box-shadow: 0 2px 4 px rgba(0,0,0,0.1);margin-right: 20px; width: 400px;height: 400px;overflow-wrap: break-word; " class="card bg-dark mt-3"  >
-       
-      
           <img src="{{produc.image.url}}" style="width: 300px;height: 200px; border-radius: 15px;" class="card-img-top" alt="...">
-       
         
         <div style="display: flex;flex-direction: column;" class="card-body ">
           <h5 style="color:white;" class="card-title">{{produc.shorten}}</h5>
@@ -64,6 +64,6 @@
   {%endfor%}
    </div>
 
-
+</div>
 
 {% endblock content %}

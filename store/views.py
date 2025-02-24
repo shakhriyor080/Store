@@ -7,9 +7,7 @@ def store(request):
     slides = Slide.objects.all()
     products = Products.objects.all()
 
-
     return render(request, 'store.html', {'slides':slides, 'products':products , 'categories': categories} )
-
 
 def category1_detail(request,slug):
     categorysr = Category1.objects.get(slug__iexact=slug)
