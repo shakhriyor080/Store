@@ -1,1 +1,35 @@
-fe
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+
+
+
+<div style="width: 80%;height: 400px ;margin: 0 auto;" class="row row-cols-1 row-cols-md-3 g-10 ">
+
+
+
+    {%for produc in categorysr.categor.all%}
+    <div style=""  class="col d-flex   "> 
+      <div style="border-radius: 8px;padding: 20px;margin-bottom: 20px;box-shadow: 0 2px 4 px rgba(0,0,0,0.1);margin-right: 20px; width: 400px;height: 400px;overflow-wrap: break-word; " class="card bg-dark mt-3"  >
+          <img src="{{produc.image.url}}" style="width: 300px;height: 200px; border-radius: 15px;" class="card-img-top" alt="...">
+        
+        <div style="display: flex;flex-direction: column;" class="card-body ">
+          <h5 style="color:white;" class="card-title">{{produc.shorten}}</h5>
+          <p style="color:white;" class="card-text">{{produc.snippet}}</p>
+
+          <p style="color:white;" class="card-text">{{produc.price}}$</p>
+          <button  class="btn btn-auth"><a style="text-decoration: none;" href="">batafsil</a></button>
+  
+        </div>
+      </div> 
+    </div>
+  {%endfor%}
+   </div>
+
+</div>
+
+
+
+{% endblock %} 

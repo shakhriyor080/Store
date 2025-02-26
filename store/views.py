@@ -13,3 +13,7 @@ def category1_detail(request,slug):
     categorysr = Category1.objects.get(slug__iexact=slug)
     postss = Products.objects.order_by()
     return render(request,'category1_detail.html',{'categorysr':categorysr, 'postss':postss })
+
+def products_detail(request, slug): 
+    product = Products.objects.get(slug=slug)
+    return render(request, 'products_detail.html', {'product': product})
