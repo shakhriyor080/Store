@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.utils import timezone
 from django.shortcuts import reverse
 
 
@@ -48,5 +48,5 @@ class Products(models.Model):
 
     def shorten(self):
         return self.title[:10] + '...'
-
-
+    def get_absolute_url(self):
+        return reverse('products_detail', kwargs={'slug':self.slug})

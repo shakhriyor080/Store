@@ -1,0 +1,37 @@
+
+
+    <div class="login-opshi">
+<div class=" login-div" >
+ <form method="POST"  action="{% url 'login'%}">
+    {% csrf_token %}
+    <label >{{form.username.label}}</label> <br>
+    <div >{{form.username}}</div> <br>
+    
+    <label for="" >{{form.password.label}}</label> <br>
+    <div  >{{form.password}}</div> <br>
+    <input class="button" type="submit" value="login">
+ </form>
+</div>
+        &nbsp;
+        &nbsp;
+        &nbsp;
+       
+
+<div class="container"> 
+    {% if form.errors %}
+     <h4 style="color: red;">login or password entered incorrecly</h4>
+     {% endif%}
+     <h6>
+        <a href="{% url 'password_reset'%}">
+            forget your password?
+        </a>
+     </h6>
+     <br>
+     {% if user.is_authenticated%}
+     <a style="color: rgb(245, 38, 38);" href="{% url 'logout'%}">logout</a>
+     {% endif %}
+</div>
+</div>
+
+
+

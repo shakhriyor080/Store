@@ -34,13 +34,6 @@
 {% block content%}
 
 <div style="display: flex ;">  
-<div> 
-{% for itms in categories %}
-&nbsp; &nbsp;&nbsp;<a href="{{itms.get_absolute_url}}">
-<button class="btn btn-outline-secondary" >{{itms.title}}</button> <br>
-</a><br> 
-{% endfor%} 
-</div> 
 
 <div style="width: 80%;height: 400px ;margin: 0 auto;" class="row row-cols-1 row-cols-md-3 g-10 ">
 
@@ -56,7 +49,7 @@
           <p style="color:white;" class="card-text">{{produc.snippet}}</p>
 
           <p style="color:white;" class="card-text">{{produc.price}}$</p>
-          <button  class="btn btn-auth"><a style="text-decoration: none;" href="{% url 'products_detail' produc.slug%}">batafsil</a></button>
+          <button  class="btn btn-auth"><a style="text-decoration: none;" href="{{produc.get_absolute_url}}">batafsil</a></button>
   
         </div>
       </div> 
