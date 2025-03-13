@@ -49,7 +49,7 @@
           <p style="color:white;" class="card-text">{{produc.snippet}}</p>
 
           <p style="color:white;" class="card-text">{{produc.price}}$</p>
-          <button  class="btn btn-auth"><a style="text-decoration: none;" href="{{produc.get_absolute_url}}">batafsil</a></button>
+          <button  class="btn btn-auth"><a style="text-decoration: none;" href="{%url 'store:products_detail' produc.pk%}">batafsil</a></button>
   
         </div>
       </div> 

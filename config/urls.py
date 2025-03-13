@@ -22,8 +22,9 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include(('store.urls'))),
-    path('accounts/', include('django.contrib.auth.urls')),
+    path('', include(('store.urls', 'store'), namespace='store')),
+    path('users/', include(('users.urls', 'users'), namespace='users'))
+
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 urlpatterns += staticfiles_urlpatterns()
