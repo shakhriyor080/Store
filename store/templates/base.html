@@ -55,6 +55,11 @@
       <img src="{{ user.image.url }}" alt="">
       <p class="subtitle is-6 mx-1">{{ user.username }}</p>
   </a>
+
+  <form action="{% url 'store:search_result' %}" method="GET">  
+    <input type="text"  name="search" placeholder="Search..." >
+    </form>
+
       {% else %}
     <a href="{% url 'users:sign_up' %}" class="button is-light">
         <p class="subtitle is-6 mx-1">регистрация</p>

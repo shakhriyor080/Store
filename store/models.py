@@ -33,3 +33,14 @@ class Products(models.Model):
     def shorten(self):
         return self.title[:10] + '...'
   
+
+class Comment(models.Model):
+    news = models.ForeignKey(Products, on_delete = models.CASCADE, null=True, related_name='comments')
+    comment_text = models.TextField('comment', max_length=1000)
+
+    def __str__(self):
+        return 'USER'   + self.comment_text
+
+    class Meta:
+        verbose_name = 'comment'
+        verbose_name_plural = 'comments'
