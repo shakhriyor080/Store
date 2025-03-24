@@ -4,7 +4,7 @@
 {% block content %}
     <div class="container">
         <div class="card mb-4 p-4 has-text-weight-bold is-size-4">
-            <a class="button has-text-left is-danger" href="{% url 'store' %}">Back to main page</a>
+            <a class="button has-text-left is-danger" href="{% url 'store:store' %}">Back to main page</a>
             <button class="button has-text-right is-info">Checkout</button>
             <hr>
             <div class="columns has-text-centered">
@@ -41,20 +41,23 @@
                                 {{ item.quantity }}
                                 <div class="quantity ml-3">
 
-                                    <a href="{% url 'edit_cart_item' item.id %}?action=add">
-                                        <img src="{% static '/img/arrow-up.jpg' %}" class="arrows" width="20px" height="20px" alt="">
+                                    <a href="{% url 'store:edit_cart_item' item.pk %}?action=add">
+                                        <img src="" class="arrows" width="20px" height="20px" alt="add rasmi bulishi kerak">
                                     </a>
-
-                                    <a href="{% url 'edit_cart_item' item.id %}?action=take">
-                                        <img src="" width="20px" height="20px"  class="arrows" alt="">
+                                    
+                                      
+                                    <a href="{% url 'store:edit_cart_item' item.pk %}?action=take">
+                                       <svg xmlns="http://www.w3.org/2000/svg" wid fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"  class="size-2">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 13.5 12 21m0 0-7.5-7.5M12 21V3" />
+                                      </svg>
                                     </a>
                                 </div>
                             </td>
                             <td>{{ item.total_price }} sum</td>
                             <td>
-                                <a href="{% url 'delete_cart_item' item.pk %}"
+                                <a href="{% url 'store:delete_cart_item' item.pk %}"
                                    style="font-size: 20px; color: black">
-                                    <ion-icon name="trash-outline"></ion-icon>
+                                    <ion-icon name="trash-outline">del</ion-icon>
                                 </a>
                             </td>
                         </tr>

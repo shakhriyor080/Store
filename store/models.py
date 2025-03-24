@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils import timezone
 from django.shortcuts import reverse
+from django.contrib.auth.models import User
 
 
 class Slide(models.Model):
@@ -44,3 +45,14 @@ class Comment(models.Model):
     class Meta:
         verbose_name = 'comment'
         verbose_name_plural = 'comments'
+
+class CartItem(models.Model):
+    customer = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
+    product = models.ForeignKey(Products, on_delete=models.CASCADE)
+    quantity = models.IntegerField()
+
+    def __str__(self):
+        return self.product.title
+
+    def total_price(self):
+        return self.product.price * self.quantity
