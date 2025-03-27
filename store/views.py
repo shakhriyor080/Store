@@ -1,7 +1,11 @@
 from django.shortcuts import render , reverse ,redirect
-from .models import Slide,Products,Comment,CartItem
+from .models import Slide,Products,Comment,CartItem,Order,OrderProduct,Review
 from django.db.models import Q
 from django.http import HttpResponse, HttpResponseRedirect,Http404
+from django.contrib.auth.models import User
+from django.conf import settings
+User = settings.AUTH_USER_MODEL
+from . import forms
 
 
 def store(request):
@@ -83,4 +87,62 @@ def delete_cart_item(request, pk):
     cart_item = CartItem.objects.get(pk=pk)
     cart_item.delete()
     return redirect('store:cart')
+
+
+
+
+
+def create_order(request):
+    cart_items = CartItem.objects.all()
+    total_price = sum([item.total_price() for item in cart_items])
+    amount = sum([item.quantity for item in cart_items])
+    form = forms.OrderForm(request.POST)
+
+    if request.method == 'POST' and form.is_valid():
+        order = Order.objects.create(
+            address=request.POST.get('address'),
+            phone=request.POST.get('phone'),
+            total_price=total_price,
+            user=request.user
+        )
+        for cart_item in cart_items:
+            OrderProduct.objects.create(
+                order=order,
+                product=cart_item.product,
+                amount=cart_item.quantity,
+                total=cart_item.total_price(),
+            )
+
+        cart_items.delete()
+        return redirect('store:cart')
+
+    form = forms.OrderForm()
+    return render(request, 'order_creation_page.html', {
+        'cart_items': cart_items,
+        'total_price': total_price,
+        'amount': amount,
+        'form': form})
+
+
+
+def orders(request):
+    orders_list = Order.objects.filter(user=request.user)
+    return render(request, 'orders.html', {'orders': orders_list})
+
+
+def rate_product(request, pk):
+    product = Products.objects.get(pk=pk)
+    reviews = Review.objects.filter(product=product)
+
+    if request.method == 'POST':
+        form = forms.RateForm(request.POST)
+        if form.is_valid():
+            rating = form.save(commit=False)
+            rating.user = request.user
+            rating.product = product
+            rating.save()
+            return redirect('store:rate_product', pk=pk)
+    form = forms.RateForm()
+    return render(request, 'rate.html', {'form': form, 'product': product, 'reviews': reviews})
+
 

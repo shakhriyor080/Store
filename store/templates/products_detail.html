@@ -46,7 +46,7 @@
         </div>
     </div>
 
-
+    <a href="{% url 'store:rate_product' product.pk  %}" style="text-decoration: none;color: white ;"  >Rate</a>
 
     <form class="form" action="{% url 'store:leave_comment' product.pk %}" method="POST">
             
@@ -54,13 +54,13 @@
             <textarea style="width: 170px;height: 45px;" class="textarea" id="comment" name="comment_text" cols="10" rows="1" aria-required="true" placeholder="Оставьте комментарий"></textarea>
             <br><br>
             <button class="btn btn-primary" type="submit" >commentni qo'shish</button>
-            <a href="{% url 'store:store'  %}" style="margin-bottom: 15px;text-decoration: none;color: white ;"  >bosh sahifaga o'tish</a>
             
             {% for comment in product.comments.all %}
                 <p style="margin-left: 6px;margin-top: 30px;" class=""><i>{{comment.author}} </i>{{comment.comment_text}}</p> <hr>
             {% endfor %}
         </form>
 
+       
 
 </section>
 
